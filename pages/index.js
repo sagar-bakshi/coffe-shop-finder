@@ -1,7 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
+import Card from "../components/Card";
+import coffeeStoresData from '../data/coffee-stores.json';
 
-export default function Home() {
+
+export async function getStaticProps(context) {
+  return {
+    props: {
+      coffeeStores : coffeeStoresData
+    }, // will be passed to the page component as props
+  }
+}
+
+export default function Home({coffeeStores}) {
   return (
     <div className="z-10">
       <Head>
@@ -18,7 +29,7 @@ export default function Home() {
               Connoissuer
             </span>
           </h1>
-          <p className="text-white p-2">Discover your local coffee shops!</p>
+          <p className="text-white p-2 text-xl text-gray-200">Discover your local coffee shops!</p>
           <button
             className="inline-flex justify-center py-4
             px-6 border border-transparent shadow-sm mt-2
@@ -33,6 +44,23 @@ export default function Home() {
         <div className="absolute top-0 -z-50 right-10">
           <Image src="/static/hero-image.png" height={600} width={1200} />
         </div>
+
+          
+          {
+            coffeeStores.length > 0 && 
+            <>
+              <h2 className="text-2xl font-semibold ml-3 mt-3 text-white tracking-wide">Toronto Store</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+                {coffeeStores.map((store)=>(
+                  <Card key={store.id} 
+                      name={store.name}
+                      href={`/coffee-stores/${store.id}`}
+                      imgUrl={store.imgUrl}
+                    />
+                ))}
+              </div>
+            </>
+          }
       </main>
 
       <footer className=""></footer>

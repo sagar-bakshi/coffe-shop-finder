@@ -7,7 +7,7 @@ export default function CoffeeStore() {
     <div>
       Coffee Store
       <Link href="/">
-        <a>Back to Home</a>
+        <a> Back to Home <strong>{router.query.id}</strong></a>
       </Link>
     </div>
   );
