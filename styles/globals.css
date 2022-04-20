@@ -7,9 +7,3 @@
     @apply bg-gradient-to-r from-violet-500 to-fuchsia-500;
   }
 }
-
-@layer base {
-  html{
-    font-family: 'Roboto Slab', serif;
-  }
-}
